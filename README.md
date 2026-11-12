@@ -97,6 +97,7 @@ The assistant never books or pays on the traveler's behalf.
 This repository holds the public listing and client packages for the hosted server; the server itself runs at the endpoint above.
 
 - `server.json`: entry for the [official MCP Registry](https://registry.modelcontextprotocol.io).
+- `glama.json`: maintainers for the [Glama](https://glama.ai/mcp/servers) listing.
 - `.claude-plugin/marketplace.json` and `plugins/mirai-flights`: Claude Code plugin with the server and the `private-jet-search` skill.
 
 ## License
