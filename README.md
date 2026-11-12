@@ -71,7 +71,7 @@ A typical flow is `find_location` â†’ `search_charter` or `search_empty_legs` â†
 | Protocol versions | `2026-07-28`, `2025-11-25`, `2025-06-18`, `2025-03-26`, `2024-11-05`. |
 | Languages | `en`, `ru`, `de`, `es`, `it`, `fr`. Each tool takes an optional `language`; without it the server uses English when the client's `Accept-Language` allows it, otherwise the first supported language listed there. |
 | Currencies | `EUR` (default) or `USD`, per call via `currency`. |
-| Rate limits | Per client IP: 600 requests and 60 charter searches per minute. Charter searches are also capped server-wide. Requests over the limit get HTTP `429`; charter searches over the limit return a tool error asking to retry in a minute. |
+| Rate limits | Fair-use limits apply per client. Requests over the limit get HTTP `429`; charter searches over the limit return a tool error asking to retry in a minute. |
 | Payments | None. No tool books or takes payment; booking happens on mirai.flights. |
 | Privacy policy | https://mirai.flights/privacy |
 | Terms of service | https://mirai.flights/terms |
