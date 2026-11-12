@@ -12,8 +12,9 @@ https://mcp.mirai.flights/mcp
 
 ## Why use it
 
-- **Live charter prices.** A search asks operators about the exact route, date and group size and returns priced options by aircraft type, cheapest first, usually within seconds.
-- **Empty legs up to 75% below the regular charter price.** One-way repositioning flights you can filter by route, dates, group size, price and aircraft class.
+- **Live charter prices.** A search asks operators about the exact route, date and group size and returns priced options by aircraft type, cheapest first, usually within seconds, with the operator discounts shown on mirai.flights.
+- **Results you can see.** In Claude and ChatGPT, offers appear as the same cards as on mirai.flights: aircraft photos, prices and discounts, then a gallery, flight details and on-board amenities for the one you open, with a button to book it.
+- **Empty legs up to 75% below the regular charter price.** One-way repositioning flights you can filter by route, dates, group size, price and aircraft class, priced for the exact group before booking.
 - **100+ aircraft models,** from light jets for short hops to heavy long-range jets.
 - **From question to booking in one conversation.** The offer the traveler picks comes with a link that opens the same flight and price on mirai.flights or in the Mirai app.
 - **Multi-leg trips.** Round trips and itineraries of up to five legs in one search.
@@ -52,15 +53,25 @@ No installation, no keys. Add the endpoint to your client:
 
 The assistant never books or pays on the traveler's behalf.
 
+## Interactive results
+
+Clients that support MCP Apps, such as Claude and ChatGPT, show search results as an interactive view styled like mirai.flights:
+
+- charter offers as cards with the aircraft photo, class, seats, price and discount, with filters by aircraft class and sorting by price or flight time;
+- empty legs as cards with the route, departure window, seats and price per jet;
+- the details of an offer, with a photo gallery, flight details, on-board amenities and a **Book** button that opens the booking link.
+
+The view follows the conversation language and refreshes an expired charter search on request. Other clients get the same data as text, including aircraft image URLs.
+
 ## Tools
 
 | Tool | What it does |
 |---|---|
 | `find_location` | Finds cities and airports by name or IATA/ICAO code and returns a `ref` for each. Every other tool takes places as refs. |
-| `search_charter` | Prices a charter route of 1–5 legs: local departure time, passengers, optional luggage and aircraft class. Progress is streamed while operators answer; options come back sorted by price. |
+| `search_charter` | Prices a charter route of 1–5 legs: local departure time, passengers, optional luggage and aircraft class. Progress is streamed while operators answer; options come back sorted by price, with aircraft image, seats and discount. |
 | `get_charter_results` | Collects more options for a search that returned `complete: false`. |
-| `get_charter_option` | Details of the charter option the traveler picked, and its booking link. |
-| `search_empty_legs` | Searches empty legs by route, dates, passengers, price and aircraft class. All filters are optional. |
+| `get_charter_option` | Details of the charter option the traveler picked: flight legs, photos, on-board amenities and its booking link. |
+| `search_empty_legs` | Searches empty legs by route, dates, passengers, price and aircraft class. All filters are optional; listed prices are the minimum per jet. |
 | `get_empty_leg` | Details of one empty leg, the exact price for the group, and its booking link. |
 | `list_aircraft_classes` | Aircraft classes (light, midsize, heavy and more) with example types, for filtering. |
 
@@ -70,7 +81,7 @@ The assistant never books or pays on the traveler's behalf.
 
 **Does the assistant book the flight?** No. It finds and prices flights and gives a link; the traveler books on mirai.flights or in the Mirai app.
 
-**How accurate are the prices?** Charter prices come from operators at the time of the search, and the fixed price is confirmed when the traveler books. `get_empty_leg` recalculates an empty leg price for the exact number of passengers.
+**How accurate are the prices?** Charter prices come from operators at the time of the search, and the fixed price is confirmed when the traveler books. An empty leg price depends on the number of passengers: the list shows the minimum per jet, and `get_empty_leg` prices it for the exact group.
 
 **Where does it work?** Worldwide: any city or airport that `find_location` returns.
 

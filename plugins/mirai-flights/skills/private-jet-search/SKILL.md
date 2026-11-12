@@ -27,7 +27,9 @@ For every place, call `find_location` and pass the returned `ref` to the other t
 ## 3. Present
 
 - Options come sorted by price. Show three to five, not the whole list: the cheapest, a good-value step up, and the most comfortable that fits the group. For each: aircraft type, seats, flight time, price.
-- Quote prices exactly as returned, with their currency. Never convert or round them.
+- Quote prices exactly as returned, with their currency. Never convert or round them. When an option has `discount_percent`, mention the discount and `price_before_discount`.
+- Empty leg prices in a search are the minimum per jet; the price for the group comes from `get_empty_leg`.
+- If your client shows the Mirai Flights view, the traveler already sees the cards with photos: summarize and recommend instead of repeating every option.
 - Say that the charter price is fixed when the trip is booked, and that the final confirmation happens on mirai.flights.
 - Offer the next step: "Want the booking link for one of these?"
 
