@@ -1,6 +1,6 @@
 {
   "name": "mirai-flights",
-  "description": "Mirai Flights plugins for Claude Code: private jet charter and empty-leg search.",
+  "description": "Mirai Flights for Claude Code: private jet charter pricing and empty leg search with booking links.",
   "owner": {
     "name": "Mirai Flights",
     "email": "info@mirai.flights"
@@ -9,7 +9,14 @@
     {
       "name": "mirai-flights",
       "source": "./plugins/mirai-flights",
-      "description": "Private jet charter prices and empty-leg deals from Mirai Flights, with booking links."
+      "description": "Private jet charter prices and empty leg flights up to 75% off, with booking links, from Mirai Flights.",
+      "category": "travel",
+      "keywords": [
+        "private jet",
+        "charter",
+        "empty legs",
+        "travel"
+      ]
     }
   ]
 }

@@ -1,37 +1,57 @@
 ---
 name: private-jet-search
-description: Search private jet charter prices and empty-leg flights with the Mirai Flights MCP tools and give the traveler a booking link. Use when the user asks about chartering a private jet, private flight prices, or empty legs.
+description: Price private jet charters and find empty leg flights with the Mirai Flights MCP tools, then give the traveler a booking link. Use when the user asks about chartering a private or business jet, private flight prices, jet charter quotes, flying privately, or empty legs.
 ---
 
 # Private jet search with Mirai Flights
 
-The `mirai-flights` MCP server searches charter operators and empty-leg flights. It never books: the traveler books by opening the link you give them.
+The `mirai-flights` MCP server prices private jet charters with operators and lists empty leg flights. It never books: the traveler books by opening the link you give them, on mirai.flights or in the Mirai app. Your job is to get them from a question to the right offer and its link with as few back-and-forths as possible.
 
-## Places
+## 1. Get the trip
 
-1. Call `find_location` for every place the user names, and pass the returned `ref` to the other tools. Never invent refs.
-2. When several results match (London, UK and London, Canada), pick by country and context, or ask.
-3. A city ref searches all its airports; an airport ref searches only that airport. Prefer the city unless the user names an airport.
+You need: from, to, date, approximate departure time, and number of passengers. Ask only for what is missing, in one short question. If the user gives a date but no time, assume 12:00 local and say so. A round trip is two legs; multi-city trips take up to five.
 
-## Charter
+For every place, call `find_location` and pass the returned `ref` to the other tools. Never invent refs.
 
-1. Call `search_charter` with one leg per flight: `departure` is local time at the departure airport, `YYYY-MM-DDTHH:mm`. A round trip is two legs. Pass `aircraft_class_id` (from `list_aircraft_classes`) only if the user asks for a class.
-2. The search can take up to ~40 seconds. If `complete` is false, call `get_charter_results` with the same `task_id` before saying nothing was found.
-3. Options come sorted by price. Show a short list: aircraft type, seats, price, flight time.
-4. When the user picks an option, call `get_charter_option` with `task_id`, `suggestion_id` and `company_id`, and show its `link`.
+- Prefer the city ref: it searches all the city's airports and finds more aircraft. Use an airport ref only when the user names an airport.
+- When several places match (London, UK and London, Canada), pick by country and context, or ask.
 
-## Empty legs
+## 2. Search
 
-1. Call `search_empty_legs`; every filter is optional. Empty legs are one-way, fly in a departure window rather than at a fixed time, and are cheaper because the aircraft would otherwise fly empty.
-2. When the user picks a flight, call `get_empty_leg` with its `id`, `company_id` and the passenger count, and show the exact price and `link`.
+**Charter:** call `search_charter`. `departure` is local time at the departure airport, `YYYY-MM-DDTHH:mm`. Pass `aircraft_class_id` (from `list_aircraft_classes`) only if the user asks for a class. Operators answer for up to ~40 seconds; if `complete` is false, call `get_charter_results` with the same `task_id` before concluding.
+
+**Empty legs:** call `search_empty_legs`. Every filter is optional. Empty legs are one-way repositioning flights, up to 75% below the regular charter price, but they fly on the operator's route and in a departure window.
+
+**Cross-sell honestly:** for a one-way trip where the user is price-sensitive or flexible on dates, also check `search_empty_legs` on the same route and nearby dates, and mention a match as a cheaper alternative. Don't push empty legs on a fixed round trip.
+
+## 3. Present
+
+- Options come sorted by price. Show three to five, not the whole list: the cheapest, a good-value step up, and the most comfortable that fits the group. For each: aircraft type, seats, flight time, price.
+- Quote prices exactly as returned, with their currency. Never convert or round them.
+- Say that the charter price is fixed when the trip is booked, and that the final confirmation happens on mirai.flights.
+- Offer the next step: "Want the booking link for one of these?"
+
+## 4. Close
+
+When the user picks an option:
+
+- Charter: call `get_charter_option` with `task_id`, `suggestion_id` and `company_id`.
+- Empty leg: call `get_empty_leg` with `id`, `company_id` and the passenger count, and show the exact price for the group.
+
+Show the `link` prominently, for example **[Book this flight on Mirai Flights](link)**, with the aircraft, route, date and price next to it, so the traveler can confirm at a glance. If the link is empty, point them to https://mirai.flights.
+
+## When nothing fits
+
+Don't stop at "no results". Offer the next best move:
+
+- the city ref instead of a single airport, or a nearby city;
+- a different time of day, or the day before or after;
+- a smaller or larger aircraft class;
+- empty legs on the route, if the dates are flexible.
+
+If a tool says the search expired, run `search_charter` again.
 
 ## Language and currency
 
 - Pass `language` (`en`, `ru`, `de`, `es`, `it`, `fr`) matching the conversation.
-- Pass `currency` (`EUR` or `USD`) the user asked for, and keep the same currency in every follow-up call of one search; prices default to EUR.
-
-## Answering
-
-- Quote prices exactly as returned, with their currency; never convert them yourself.
-- Prices are indicative until the operator confirms on mirai.flights.
-- If a tool says the search expired, run `search_charter` again.
+- Pass the `currency` (`EUR` or `USD`) the user asked for, or `USD` when they talk in dollars, and keep it in every follow-up call of the same search. Prices default to EUR.
