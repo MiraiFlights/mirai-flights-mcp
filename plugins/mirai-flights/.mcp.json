@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "mirai-flights": {
+      "type": "http",
+      "url": "https://mcp.mirai.flights/mcp"
+    }
+  }
+}

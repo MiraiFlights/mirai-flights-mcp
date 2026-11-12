@@ -1,0 +1,18 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "flights.mirai/mirai-flights",
+  "title": "Mirai Flights",
+  "description": "Private jet charter prices and empty-leg deals worldwide, with booking links. No account or API key.",
+  "websiteUrl": "https://mirai.flights",
+  "repository": {
+    "url": "https://github.com/MiraiFlights/mirai-flights-mcp",
+    "source": "github"
+  },
+  "version": "1.0.0",
+  "remotes": [
+    {
+      "type": "streamable-http",
+      "url": "https://mcp.mirai.flights/mcp"
+    }
+  ]
+}

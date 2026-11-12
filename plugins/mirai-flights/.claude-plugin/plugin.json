@@ -1,0 +1,10 @@
+{
+  "name": "mirai-flights",
+  "version": "1.0.0",
+  "description": "Private jet charter prices and empty-leg deals from Mirai Flights, with booking links.",
+  "author": { "name": "Mirai Flights", "email": "info@mirai.flights", "url": "https://mirai.flights" },
+  "homepage": "https://mirai.flights",
+  "repository": "https://github.com/MiraiFlights/mirai-flights-mcp",
+  "license": "MIT",
+  "keywords": ["private jet", "charter", "empty leg", "travel", "mcp"]
+}

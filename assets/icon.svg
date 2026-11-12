@@ -1,0 +1,15 @@
+<svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+<style>
+    @media (prefers-color-scheme: dark) {
+     .dark { fill: #fff } 
+    }
+  </style>
+<path d="M22.9256 8.30005H25.0598V21.4247H22.9033L22.9256 8.30005Z" class="dark" fill="#0A0A0E"/>
+<path d="M22.9256 26.4735H25.0598V39.5982H22.9033L22.9256 26.4735Z" class="dark" fill="#0A0A0E"/>
+<path d="M34.3017 12.1223L35.8261 13.6095L26.5458 22.927L25.0586 21.4397L34.3017 12.1223Z" class="dark" fill="#0A0A0E"/>
+<path d="M21.4541 24.9718L22.9785 26.5259L13.6982 35.8062L12.1738 34.2818L21.4541 24.9718Z" class="dark" fill="#0A0A0E"/>
+<path d="M48 22.8676V25.0389H26.5469V22.8824L48 22.8676Z" class="dark" fill="#0A0A0E"/>
+<path d="M21.4754 22.8676V25.0389H0V22.8824L21.4754 22.8676Z" class="dark" fill="#0A0A0E"/>
+<path d="M35.8261 34.252L34.3017 35.7764L25.0586 26.5259L26.5458 25.0015L35.8261 34.252Z" class="dark" fill="#0A0A0E"/>
+<path d="M22.9785 21.4026L21.4541 22.8898L12.1738 13.6095L13.6982 12.1223L22.9785 21.4026Z" class="dark" fill="#0A0A0E"/>
+</svg>
